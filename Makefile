@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/08/23 20:39:44 by mde-sa--         ###   ########.fr        #
+#    Updated: 2023/08/23 22:16:41 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ INCDIR	=   includes
 
 LIBFTDIR =  $(SRCDIR)/libft
 
-SRC		=	main.c
+SRC		=	main.c parse_pipex_args.c
 
 LIBS 	=   -L$(LIBFTDIR) -lft
 
