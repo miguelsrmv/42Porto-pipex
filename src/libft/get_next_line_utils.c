@@ -6,20 +6,19 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 14:09:00 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/08/23 11:53:22 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/08/23 21:52:26 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
+#include "libft.h"
 
 size_t	ft_gnl_strlen(const char *str)
 {
 	size_t	i;
 
 	i = 0;
-	if (!str)
-		return (0);
 	while (str[i])
 		i++;
 	return (i);

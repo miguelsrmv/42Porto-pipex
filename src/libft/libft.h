@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:15:57 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/08/23 20:23:59 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/08/23 21:53:23 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ char	*ft_lutoa_base(long unsigned int address, char *base);
 char	*ft_strrev(char *str);
 
 /* Part 5: get_next_line */
+size_t	ft_gnl_strlen(const char *str);
 char	*get_next_line(int fd);
 char	*ft_gnl_get_text(int fd, char *buffer);
-size_t	ft_gnl_strlen(const char *str);
 char	*ft_gnl_strchr(const char *s, int c);
 char	*ft_gnl_strjoin(char *s1, char *s2);
 char	*ft_gnl_strtrim_left(char *buffer);
