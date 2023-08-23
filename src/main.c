@@ -6,13 +6,17 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 09:56:28 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/08/23 20:56:01 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/08/23 22:04:21 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	return (1);
+	if (argc != 5)
+		return (ARG_USAGE_ERROR);
+	argv++;
+
+	return (0);
 }
