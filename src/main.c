@@ -6,11 +6,13 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 12:24:41 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/08/29 13:08:24 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:06:54 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include <sys/wait.h>
+#include <stdio.h>
 
 int	open_file(char *arg, int file_type)
 {
@@ -48,7 +50,7 @@ void	child_process(int *pipe_fd, char **argv, char **envp)
 		exit(EXIT_FAILURE);
 	}
 	close(pipe_fd[1]);
-	execute(argv[2], envp);
+	execute_command(argv[2], envp);
 }
 
 void	parent_process(int *pipe_fd, char **argv, char **envp)
@@ -71,7 +73,7 @@ void	parent_process(int *pipe_fd, char **argv, char **envp)
 		exit(EXIT_FAILURE);
 	}
 	close(file_fd);
-	execute(argv[3], envp);
+	execute_command(argv[3], envp);
 }
 
 int	main(int argc, char **argv, char **envp)

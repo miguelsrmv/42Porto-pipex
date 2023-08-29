@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 20:42:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/08/29 13:08:38 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:48:25 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 // Libraries
 # include "../src/libft/libft.h"
 # include <fcntl.h>
+
 
 // Error Codes
 # define SUCCESS 0
@@ -27,9 +28,12 @@
 
 // Function declarations
 /// Main.c
+char	**get_path_list(char **envp);
+char	*get_command_location(char **path, char *command);
+void	free_memory(char **path, char **split_commands, char *command_location);
+void	execute_command(char *command, char **envp);
 int		open_file(char *arg, int file_type);
 void	child_process(int *pipe_fd, char **argv, char **envp);
 void	parent_process(int *pipe_fd, char **argv, char **envp);
-
 
 #endif
