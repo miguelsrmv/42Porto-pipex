@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 20:42:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/08/23 22:13:14 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/08/29 13:08:38 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,18 @@
 # include <fcntl.h>
 
 // Error Codes
-# define ARG_USAGE_ERROR 1
-# define INVALID_ARGS_ERROR 2
-# define FILE_NOT_FOUND_ERROR 3
-# define INVALID_CMD 4
+# define SUCCESS 0
+# define ERROR 1
+# define IN_FILE 0
+# define OUT_FILE 1
+# define UNABLE_TO_MALLOC "Error: Couldn't allocate memory.\n"
+# define ARG_USAGE "Error: Invalid usage.\n"
 
 // Function declarations
-int	parse_pipex_args(char **args);
+/// Main.c
+int		open_file(char *arg, int file_type);
+void	child_process(int *pipe_fd, char **argv, char **envp);
+void	parent_process(int *pipe_fd, char **argv, char **envp);
+
 
 #endif
