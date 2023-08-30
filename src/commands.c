@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 13:14:10 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/08/30 11:02:56 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/08/30 21:12:11 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ char	*get_command_location(char **path, char *command)
 	return (NULL);
 }
 
-void	free_memory(char **path, char **split_commands, char *command_location)
+void	free_memory(char **path, char **split_commands, char *command_location,
+				int exit_code)
 {
 	int	i;
 
@@ -81,7 +82,7 @@ void	free_memory(char **path, char **split_commands, char *command_location)
 	}
 	if (command_location)
 		free(command_location);
-	exit(EXIT_FAILURE);
+	exit(exit_code);
 }
 
 void	execute_command(char *command, char **envp)
@@ -92,14 +93,14 @@ void	execute_command(char *command, char **envp)
 
 	path = get_path_list(envp);
 	if (path == NULL)
-		free_memory(NULL, NULL, NULL);
+		free_memory(NULL, NULL, NULL, EXIT_FAILURE);
 	split_commands = ft_command_split(command);
 	if (split_commands == NULL)
-		free_memory(path, NULL, NULL);
+		free_memory(path, NULL, NULL, EXIT_FAILURE);
 	command_location = get_command_location(path, split_commands[0]);
 	if (command_location == NULL)
-		free_memory(path, split_commands, NULL);
+		free_memory(path, split_commands, NULL, COMMAND_NOT_FOUND);
 	free(path);
 	if (execve(command_location, split_commands, envp) == -1)
-		free_memory(path, split_commands, command_location);
+		free_memory(path, split_commands, command_location, EXIT_FAILURE);
 }

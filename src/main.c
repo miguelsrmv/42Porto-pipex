@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 12:24:41 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/08/30 11:29:17 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/08/30 21:15:18 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,19 +96,4 @@ int	main(int argc, char **argv, char **envp)
 	wait(NULL);
 	parent_process(pipe_fd, argv, envp);
 	return (SUCCESS);
-
-	
-	/*
-		char	**split_commands;
-		int		i;
-		
-		split_commands = ft_command_split(argv[1]);
-		i = 0;
-		while (split_commands[i])
-		{
-			ft_printf("%s\n", split_commands[i]);
-			i++;
-		}
-		printf("%s", envp[argc - argc]);
-	*/
 }

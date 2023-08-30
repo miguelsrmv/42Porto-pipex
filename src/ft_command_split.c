@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:31:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/08/30 11:28:48 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/08/30 21:15:06 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static char	*get_word(const char *s, size_t *len)
 			if (!s[num.i])
 				break ;
 		}
-		else if (ft_isquote(s[num.i]) 
+		else if (ft_isquote(s[num.i])
 			&& (ft_isspace(s[num.i - 1]) || ft_isspace(s[num.i + 1]))
 			&& (!num.in_quote || s[num.i] == num.quote_char))
 		{
@@ -114,7 +114,8 @@ char	**ft_command_split(const char *s)
 	i = -1;
 	while (++i < word_count)
 	{
-		if (!(words[i] = get_next_word(&s, &len)))
+		words[i] = get_next_word(&s, &len);
+		if (!words[i])
 		{
 			while (i >= 0)
 				free(words[i--]);
@@ -126,40 +127,3 @@ char	**ft_command_split(const char *s)
 	words[word_count] = NULL;
 	return (words);
 }
-
-
-/*
-char	**ft_command_split(const char *s)
-{
-	char	**words;
-	int		word_count;
-	int		i;
-	size_t	len;
-
-	i = 0;
-	word_count = get_word_count(s);
-	words = malloc((word_count + 1) * sizeof(char *));
-	if (!words)
-		return (NULL);
-	while (i < word_count)
-	{
-		while (ft_isspace(*s))
-			s++;
-		if (*s)
-		{
-			words[i] = get_word(s, &len);
-			if (!words[i])
-			{
-				while (i >= 0)
-					free(words[i--]);
-				free(words);
-				return (NULL);
-			}
-			s += len;
-			i++;
-		}
-	}
-	words[word_count] = NULL;
-	return (words);
-}
-*/

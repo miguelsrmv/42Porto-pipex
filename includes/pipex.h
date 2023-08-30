@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 20:42:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/08/30 11:09:43 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/08/30 21:10:34 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define ERROR 1
 # define IN_FILE 0
 # define OUT_FILE 1
+# define COMMAND_NOT_FOUND 127
 # define UNABLE_TO_MALLOC "Error: Couldn't allocate memory.\n"
 # define ARG_USAGE "Error: Invalid usage.\n"
 
@@ -30,7 +31,8 @@
 /// Commands.c
 char	**get_path_list(char **envp);
 char	*get_command_location(char **path, char *command);
-void	free_memory(char **path, char **split_commands, char *command_location);
+void	free_memory(char **path, char **split_commands, char *command_location,
+			int exit_code);
 void	execute_command(char *command, char **envp);
 
 /// Main.c
