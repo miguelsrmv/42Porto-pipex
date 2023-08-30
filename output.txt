@@ -1,6 +1,4 @@
-fruit
-carrot
-water
-banana
-fruit
-potato
+     1	fruit pie
+     2	banana split
+     3	fruit tart
+     4	cherry tart

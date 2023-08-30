@@ -1,6 +1,4 @@
-fruit apple
-vegetable carrot
-drink water
-fruit banana
-drink apple
-vegetable potato
+apple pie
+banana split
+apple tart
+cherry tart
