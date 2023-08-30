@@ -1,6 +1,5 @@
-banana
-apple
-cherry
-date
-fig
-grape
+1 apple
+2 bananas
+3 cherries
+4 dates
+5 elderberries

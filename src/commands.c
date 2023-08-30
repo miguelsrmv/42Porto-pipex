@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 13:14:10 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/08/29 17:15:40 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/08/29 21:35:53 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,26 @@
 
 char	**get_path_list(char **envp)
 {
-	char	**envp_copy;
+	char	*envp_copy;
 	char	**dirs;
+	int		i;
 
-	envp_copy = envp;
-	while (ft_strncmp(*envp_copy, "PATH=", 5) != 0)
-		envp_copy++;
-	*envp_copy = *envp_copy + 5;
-	dirs = ft_split(*envp_copy, ':');
+	i = 0;
+	while (envp[i])
+	{
+		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
+			break ;
+		i++;
+	}
+	if (envp[i] == NULL)
+		return (NULL);
+	envp_copy = ft_strdup(envp[i] + 5);
+	if (envp_copy == NULL)
+		return (NULL);
+	dirs = ft_split(envp_copy, ':');
+	free(envp_copy);
+	if (dirs == NULL)
+		return (NULL);
 	return (dirs);
 }
 
@@ -44,11 +56,11 @@ char	*get_command_location(char **path, char *command)
 			return (NULL);
 		if (access(test_location, F_OK | X_OK) == 0)
 			return (test_location);
+		free(test_location);
 		i++;
 	}
 	return (NULL);
 }
-
 
 void	free_memory(char **path, char **split_commands, char *command_location)
 {
@@ -82,12 +94,13 @@ void	execute_command(char *command, char **envp)
 	path = get_path_list(envp);
 	if (path == NULL)
 		free_memory(NULL, NULL, NULL);
-	split_commands = ft_split(command, ' ');
+	split_commands = ft_command_split(command);
 	if (split_commands == NULL)
 		free_memory(path, NULL, NULL);
 	command_location = get_command_location(path, split_commands[0]);
 	if (command_location == NULL)
 		free_memory(path, split_commands, NULL);
+	free(path);
 	if (execve(command_location, split_commands, envp) == -1)
 		free_memory(path, split_commands, command_location);
 }

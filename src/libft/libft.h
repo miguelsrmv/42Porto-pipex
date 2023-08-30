@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:15:57 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/08/23 21:53:23 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/08/29 23:08:57 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,8 @@ char	*ft_gnl_strchr(const char *s, int c);
 char	*ft_gnl_strjoin(char *s1, char *s2);
 char	*ft_gnl_strtrim_left(char *buffer);
 char	*ft_gnl_strtrim_right(char *buffer);
+
+/* Part 6: extra functions */
+int		ft_isspace(int c);
 
 #endif
