@@ -6,11 +6,34 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:31:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/08/30 11:02:15 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/08/30 11:28:48 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+static char	*ft_substr_quotes(char const *s, unsigned int start, size_t len)
+{
+	char	*substring;
+
+	if (!s)
+		return (NULL);
+	if (len > ft_strlen(s) - start)
+		len = ft_strlen(s) - start;
+	if (start > ft_strlen(s))
+		return (ft_strdup(""));
+	substring = malloc(len * sizeof(char) + 1);
+	if (!substring)
+		return (NULL);
+	if (ft_isquote(s[start]))
+	{
+		start++;
+		len -= 2;
+	}
+	ft_memcpy(substring, &s[start], len);
+	substring[len] = '\0';
+	return (substring);
+}
 
 static char	*get_word(const char *s, size_t *len)
 {
@@ -37,7 +60,7 @@ static char	*get_word(const char *s, size_t *len)
 		num.i++;
 	}
 	*len = num.i;
-	word = ft_substr(s, 0, num.i);
+	word = ft_substr_quotes(s, 0, num.i);
 	return (word);
 }
 

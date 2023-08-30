@@ -1,5 +1,6 @@
-1 apple
-2 bananas
-3 cherries
-4 dates
-5 elderberries
+fruit apple
+vegetable carrot
+drink water
+fruit banana
+drink apple
+vegetable potato

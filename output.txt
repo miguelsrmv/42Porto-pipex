@@ -1,0 +1,6 @@
+fruit
+carrot
+water
+banana
+fruit
+potato
