@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/08/29 21:00:44 by mde-sa--         ###   ########.fr        #
+#    Updated: 2023/08/30 11:03:13 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	=   pipex
 
 CC      = 	cc
 
-CFLAGS  =   -g #-Wall -Wextra -Werror 
+CFLAGS  =   -g -Wall -Wextra -Werror 
 
 SRCDIR	=	src
 

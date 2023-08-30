@@ -6,12 +6,11 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 13:14:10 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/08/29 21:35:53 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/08/30 11:02:56 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include <stdio.h>
 
 char	**get_path_list(char **envp)
 {

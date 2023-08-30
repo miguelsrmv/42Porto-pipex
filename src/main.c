@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 12:24:41 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/08/29 21:36:06 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/08/30 11:10:06 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,19 +78,6 @@ void	parent_process(int *pipe_fd, char **argv, char **envp)
 
 int	main(int argc, char **argv, char **envp)
 {
-	char **result;
-	int i;
-	i = 0;
-
-	argv++;
-	result = ft_command_split(*argv);
-	while (result[i])
-	{
-		printf("%s\n", result[i]);
-		i++;
-	}
-	return (0);
-	/*
 	int	pipe_fd[2];
 	int	pid;
 
@@ -109,5 +96,4 @@ int	main(int argc, char **argv, char **envp)
 	wait(NULL);
 	parent_process(pipe_fd, argv, envp);
 	return (SUCCESS);
-	*/
 }

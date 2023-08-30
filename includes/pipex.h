@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 20:42:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/08/29 21:35:25 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/08/30 11:09:43 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 // Libraries
 # include "../src/libft/libft.h"
 # include <fcntl.h>
-
 
 // Error Codes
 # define SUCCESS 0
@@ -39,18 +38,15 @@ int		open_file(char *arg, int file_type);
 void	child_process(int *pipe_fd, char **argv, char **envp);
 void	parent_process(int *pipe_fd, char **argv, char **envp);
 
-/// Ft_command_split
-typedef struct split_numbers {
-	int		wc;
+/// ft_command_split
+typedef struct s_split_numbers {
+	int		word_count;
 	int		in_word;
 	int		in_quote;
 	char	quote_char;
-	int		len;
+	size_t	i;
 }	t_split_numbers;
 
-static int	is_quote(char c);
-static char	*get_word(const char *s, size_t *len);
-static int	get_word_count(const char *s);
-char		**ft_command_split(const char *s);
+char	**ft_command_split(const char *s);
 
 #endif

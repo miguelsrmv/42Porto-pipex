@@ -6,84 +6,106 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:31:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/08/30 09:25:01 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/08/30 11:02:15 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "pipex.h"
-
-static int	is_quote(char c)
-{
-	return (c == '\'' || c == '\"');
-}
 
 static char	*get_word(const char *s, size_t *len)
 {
-	int		in_quote;
-	char	quote_char;
-	char	*word;
-	size_t	i;
+	t_split_numbers	num;
+	char			*word;
 
-	i = 0;
-	in_quote = 0;
-	quote_char = 0;
-	while (s[i] && (in_quote || !ft_isspace(s[i])))
+	ft_memset(&num, 0, sizeof(t_split_numbers));
+	num.i = 0;
+	while (s[num.i] && (num.in_quote || !ft_isspace(s[num.i])))
 	{
-		if (s[i] == '\\' && (quote_char != '\'' || !in_quote))
+		if (s[num.i] == '\\' && (num.quote_char != '\'' || !num.in_quote))
 		{
-			i += 2;
-			if (!s[i])
-				break;
+			num.i += 2;
+			if (!s[num.i])
+				break ;
 		}
-		else if (is_quote(s[i]) && (!in_quote || s[i] == quote_char))
+		else if (ft_isquote(s[num.i]) 
+			&& (ft_isspace(s[num.i - 1]) || ft_isspace(s[num.i + 1]))
+			&& (!num.in_quote || s[num.i] == num.quote_char))
 		{
-			in_quote = !in_quote;
-			quote_char = s[i];
+			num.in_quote = !num.in_quote;
+			num.quote_char = s[num.i];
 		}
-		i++;
+		num.i++;
 	}
-	*len = i;
-	word = ft_substr(s, 0, i);
+	*len = num.i;
+	word = ft_substr(s, 0, num.i);
 	return (word);
 }
 
 static int	get_word_count(const char *s)
 {
-	int		word_count;
-	int		in_word;
-	int		in_quote;
-	char	quote_char;
-	size_t	i;
+	t_split_numbers	num;
 
-	i = 0;
-	word_count = 0;
-	in_word = 0;
-	in_quote = 0;
-	quote_char = 0;
-	while (s[i])
+	ft_memset(&num, 0, sizeof(t_split_numbers));
+	num.i = 0;
+	while (s[num.i])
 	{
-		if (s[i] == '\\' && (quote_char != '\'' || !in_quote))
-			i += 2;
-		else if (is_quote(s[i]) && (!in_quote || s[i] == quote_char))
+		if (s[num.i] == '\\' && (num.quote_char != '\'' || !num.in_quote))
+			num.i += 2;
+		else if (ft_isquote(s[num.i])
+			&& (ft_isspace(s[num.i - 1]) || ft_isspace(s[num.i + 1]))
+			&& (!num.in_quote || s[num.i] == num.quote_char))
 		{
-			in_quote = !in_quote;
-			quote_char = s[i];
+			num.in_quote = !num.in_quote;
+			num.quote_char = s[num.i];
 		}
-		else if (!in_quote && ft_isspace(s[i]))
-			in_word = 0;
-		else if (!in_word)
+		else if (!num.in_quote && ft_isspace(s[num.i]))
+			num.in_word = 0;
+		else if (!num.in_word)
 		{
-			in_word = 1;
-			word_count++;
+			num.in_word = 1;
+			num.word_count++;
 		}
-		i++;
+		num.i++;
 	}
-	return (word_count);
+	return (num.word_count);
 }
 
+static char	*get_next_word(const char **s, size_t *len)
+{
+	while (ft_isspace(**s))
+		(*s)++;
+	return (get_word(*s, len));
+}
+
+char	**ft_command_split(const char *s)
+{
+	char	**words;
+	int		word_count;
+	int		i;
+	size_t	len;
+
+	word_count = get_word_count(s);
+	words = malloc((word_count + 1) * sizeof(char *));
+	if (!words)
+		return (NULL);
+	i = -1;
+	while (++i < word_count)
+	{
+		if (!(words[i] = get_next_word(&s, &len)))
+		{
+			while (i >= 0)
+				free(words[i--]);
+			free(words);
+			return (NULL);
+		}
+		s += len;
+	}
+	words[word_count] = NULL;
+	return (words);
+}
+
+
+/*
 char	**ft_command_split(const char *s)
 {
 	char	**words;
@@ -117,3 +139,4 @@ char	**ft_command_split(const char *s)
 	words[word_count] = NULL;
 	return (words);
 }
+*/
