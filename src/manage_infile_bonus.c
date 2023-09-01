@@ -1,25 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   manage_infile.c                                    :+:      :+:    :+:   */
+/*   manage_infile_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:23:50 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/01 22:57:25 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/01 23:01:12 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "pipex.h"
-
-char	*check_infile(char *argv)
-{
-	if (!ft_strncmp(argv, "/dev/urandom", ft_strlen("/dev/urandom")))
-		return (urandom_infile());
-	else
-		return (argv);
-}
 
 void	free_memory_buffers(char *buffer, char *path, int fd)
 {
