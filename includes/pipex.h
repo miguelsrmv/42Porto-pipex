@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 20:42:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/01 15:02:32 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/01 17:08:38 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define ERROR 1
 # define IN_FILE 0
 # define OUT_FILE 1
+# define FILE_NOT_FOUND 0
 # define COMMAND_NOT_FOUND 127
 # define UNABLE_TO_MALLOC "Error: Couldn't allocate memory.\n"
 # define ARG_USAGE "Error: Invalid usage.\n"
