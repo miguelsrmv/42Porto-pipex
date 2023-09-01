@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commands.c                                         :+:      :+:    :+:   */
+/*   commands_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 13:14:10 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/01 22:58:25 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/01 23:05:31 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,32 +59,6 @@ char	*get_command_location(char **path, char *command)
 		i++;
 	}
 	return (NULL);
-}
-
-void	free_memory_command(char **path, char **split_commands,
-			char *command_location, int exit_code)
-{
-	int	i;
-
-	if (exit_code == COMMAND_NOT_FOUND)
-		ft_printf_fd(STDERR_FILENO, "Error: command not found.\n");
-	if (path)
-	{
-		i = 0;
-		while (path[i])
-			free(path[i++]);
-		free(path);
-	}
-	if (split_commands)
-	{
-		i = 0;
-		while (split_commands[i])
-			free(split_commands[i++]);
-		free(split_commands);
-	}
-	if (command_location)
-		free(command_location);
-	exit(exit_code);
 }
 
 void	execute_command(char *command, char **envp)

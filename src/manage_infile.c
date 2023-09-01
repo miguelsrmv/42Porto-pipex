@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:23:50 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/01 22:57:25 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/01 23:04:43 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,6 @@ char	*check_infile(char *argv)
 		return (urandom_infile());
 	else
 		return (argv);
-}
-
-void	free_memory_buffers(char *buffer, char *path, int fd)
-{
-	if (buffer)
-		free(buffer);
-	if (path)
-		free(path);
-	if (fd)
-		close(fd);
-	perror(NULL);
-	exit(EXIT_FAILURE);
 }
 
 char	*urandom_infile(void)

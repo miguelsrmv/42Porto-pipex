@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 12:24:41 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/01 23:01:02 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/01 23:03:47 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,6 @@ void	error_exit(char *argv, char *file, int fd)
 	}
 	perror(NULL);
 	exit(EXIT_FAILURE);
-}
-
-char	*check_infile(char *argv)
-{
-	if (!ft_strncmp(argv, "/dev/urandom", ft_strlen("/dev/urandom")))
-		return (urandom_infile());
-	else
-		return (argv);
 }
 
 int	open_file(char *arg, int file_type)

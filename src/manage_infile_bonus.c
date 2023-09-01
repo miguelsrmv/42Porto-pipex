@@ -6,23 +6,19 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:23:50 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/01 23:01:12 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/01 23:05:15 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "pipex.h"
 
-void	free_memory_buffers(char *buffer, char *path, int fd)
+char	*check_infile(char *argv)
 {
-	if (buffer)
-		free(buffer);
-	if (path)
-		free(path);
-	if (fd)
-		close(fd);
-	perror(NULL);
-	exit(EXIT_FAILURE);
+	if (!ft_strncmp(argv, "/dev/urandom", ft_strlen("/dev/urandom")))
+		return (urandom_infile());
+	else
+		return (argv);
 }
 
 char	*urandom_infile(void)
