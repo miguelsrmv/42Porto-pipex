@@ -6,13 +6,26 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 12:24:41 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/08/30 21:15:18 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/01 15:27:39 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 #include <sys/wait.h>
 #include <stdio.h>
+
+void	error_exit(char *argv, char *file, int fd)
+{
+	if (fd)
+		close(fd);
+	if (!ft_strncmp(argv, "/dev/urandom", ft_strlen("/dev/urandom")))
+	{
+		unlink(file);
+		free(file);
+	}
+	perror(NULL);
+	exit(EXIT_FAILURE);
+}
 
 int	open_file(char *arg, int file_type)
 {
@@ -32,22 +45,23 @@ int	open_file(char *arg, int file_type)
 
 void	child_process(int *pipe_fd, char **argv, char **envp)
 {
-	int	file_fd;
+	int		file_fd;
+	char	*file;
 
 	close(pipe_fd[0]);
-	file_fd = open_file(argv[1], IN_FILE);
+	file = check_infile(argv[1]);
+	file_fd = open_file(file, IN_FILE);
+	if (file_fd == -1)
+		error_exit(argv[1], file, 0);
 	if (dup2(file_fd, STDIN_FILENO) == -1)
-	{
-		perror(NULL);
-		close(file_fd);
-		exit(EXIT_FAILURE);
-	}
+		error_exit(argv[1], file, file_fd);
 	close(file_fd);
 	if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
+		error_exit(argv[1], file, pipe_fd[1]);
+	if (!ft_strncmp(argv[1], "/dev/urandom", ft_strlen("/dev/urandom")))
 	{
-		perror(NULL);
-		close(pipe_fd[1]);
-		exit(EXIT_FAILURE);
+		unlink(file);
+		free(file);
 	}
 	close(pipe_fd[1]);
 	execute_command(argv[2], envp);

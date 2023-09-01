@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/08/30 11:03:13 by mde-sa--         ###   ########.fr        #
+#    Updated: 2023/09/01 12:31:51 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ INCDIR	=   includes
 
 LIBFTDIR =  $(SRCDIR)/libft
 
-SRC		=	main.c commands.c ft_command_split.c
+SRC		=	main.c commands.c ft_command_split.c manage_infile.c
 
 LIBS 	=   -L$(LIBFTDIR) -lft
 

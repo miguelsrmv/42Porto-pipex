@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 20:42:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/08/30 21:10:34 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/01 15:02:32 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		open_file(char *arg, int file_type);
 void	child_process(int *pipe_fd, char **argv, char **envp);
 void	parent_process(int *pipe_fd, char **argv, char **envp);
 
-/// ft_command_split
+/// ft_command_split.c
 typedef struct s_split_numbers {
 	int		word_count;
 	int		in_word;
@@ -50,5 +50,11 @@ typedef struct s_split_numbers {
 }	t_split_numbers;
 
 char	**ft_command_split(const char *s);
+
+/// Infile_manage.c
+
+char	*check_infile(char *argv);
+char	*urandom_infile(void);
+char	*create_urand_buffer(void);
 
 #endif
