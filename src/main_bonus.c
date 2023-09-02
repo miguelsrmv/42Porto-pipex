@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 12:24:41 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/02 23:20:23 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/02 23:21:30 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	main(int argc, char **argv, char **envp)
 	last_read_fd = -1;
 	while (command_num-- > 3)
 	{
+		fprintf(stderr, "Child command ongoing: %s\n", argv[argc - command_num]);
 		if (pipe(pipe_fd) == -1)
 			return (ERROR);
 		pid = fork();
@@ -35,6 +36,7 @@ int	main(int argc, char **argv, char **envp)
 		else
 			prepare_next_process(&last_read_fd, pipe_fd);
 	}
+	fprintf(stderr, "Parent command ongoing: %s\n", argv[argc - command_num]);
 	parent_process(pipe_fd, last_read_fd, argv[argc - command_num], envp);
 	return (SUCCESS);
 }
