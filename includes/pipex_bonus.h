@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 20:42:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/02 16:31:08 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/02 23:07:56 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 // Libraries
 # include "../src/libft/libft.h"
 # include <fcntl.h>
+# include <sys/wait.h>
+# include <stdio.h>
+
 
 // Error Codes
 # define SUCCESS 0
@@ -30,14 +33,22 @@
 // Function declarations
 
 /// Commands.c
+int		command_calc(int argc, char **argv);
 char	**get_path_list(char **envp);
 char	*get_command_location(char **path, char *command);
 void	execute_command(char *command, char **envp);
 
-/// Main.c
-int		open_file(char *arg, int file_type);
-void	child_process(int *pipe_fd, char **argv, char **envp);
-void	parent_process(int *pipe_fd, char **argv, char **envp);
+/// Process.c
+void	child_process_first(int *pipe_fd, char *argv, char **envp);
+void	child_process_main(int *pipe_fd, int last_read_fd,
+			char *argv, char **envp);
+void	prepare_next_process(int *last_read_fd, int *pipe_fd);		
+void	parent_process(int *pipe_fd, int last_read_fd, char *argv,
+			char **envp);
+
+/// Error_handling_bonus.c
+void	error_exit(char *argv, char *file, int fd1, int fd2);
+void	usage_check(int argc, char **argv);
 
 /// ft_command_split.c
 typedef struct s_split_numbers {
@@ -52,6 +63,7 @@ char	**ft_command_split(const char *s);
 
 /// Infile_manage.c
 
+int		open_file(char *arg, int file_type);
 char	*check_infile(char *argv);
 char	*urandom_infile(void);
 char	*create_urand_buffer(void);
@@ -60,5 +72,7 @@ char	*create_urand_buffer(void);
 void	free_memory_command(char **path, char **split_commands,
 			char *command_location, int exit_code);
 void	free_memory_buffers(char *buffer, char *path, int fd);
+void	free_infile(char **argv, char *file, int command_num);
+void	unlink_free_infile(char *argv, char *file);
 
 #endif

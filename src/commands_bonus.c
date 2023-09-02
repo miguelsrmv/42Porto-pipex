@@ -6,11 +6,18 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 13:14:10 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/01 23:05:31 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/02 23:18:49 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
+
+int		command_calc(int argc, char **argv)
+{
+	if (!ft_strncmp(argv[1], "here_doc", ft_strlen("here_doc")))
+		return (argc - 2);
+	return (argc - 1);
+}
 
 char	**get_path_list(char **envp)
 {

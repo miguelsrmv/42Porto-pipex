@@ -6,22 +6,39 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:23:50 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/01 23:05:15 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/02 23:14:39 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "pipex.h"
+#include "pipex_bonus.h"
+
+int	open_file(char *arg, int file_type)
+{
+	int	file_fd;
+
+	if (file_type == IN_FILE)
+		file_fd = open(arg, O_RDONLY, 0777);
+	if (file_type == OUT_FILE)
+		file_fd = open(arg, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (file_fd == -1)
+	{
+		perror(NULL);
+		exit(EXIT_FAILURE);
+	}
+	return (file_fd);
+}
 
 char	*check_infile(char *argv)
 {
-	if (!ft_strncmp(argv, "/dev/urandom", ft_strlen("/dev/urandom")))
-		return (urandom_infile());
-	else
-		return (argv);
+	/*if (!ft_strncmp(argv, "/dev/urandom", ft_strlen("/dev/urandom")))
+		return (urandom_infile());*/
+	/*if (!ft_strncmp(argv, "here_doc", ft_strlen("here_doc")))
+		return (heredoc_infile());
+	else*/
+	return (argv);
 }
 
-char	*urandom_infile(void)
+char	*urandom_infile(void) // Generalizar??
 {
 	char	*urand_buffer;
 	char	*buffer_path;
