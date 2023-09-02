@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 12:24:41 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/01 23:03:47 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/01 23:10:04 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ int	main(int argc, char **argv, char **envp)
 	int	pipe_fd[2];
 	int	pid;
 
-	if (argc != 5)
+	if (!(argc == 5 || (argc == 6
+				&& ft_strncmp(argv[1], "here_doc", ft_strlen("here_doc")))))
 	{
 		ft_printf("%s", ARG_USAGE);
 		return (ERROR);
