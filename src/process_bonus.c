@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 21:56:10 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/02 23:13:01 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/02 23:35:39 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	child_process_first(int *pipe_fd, char *argv, char **envp)
 	if (close(pipe_fd[0]) == -1)
 		error_exit(NULL, NULL, 0, 0);
 	file = check_infile(argv);
+	fprintf(stderr, "file: %s\n", file);
 	file_fd = open_file(file, IN_FILE);
 	if (file_fd == -1)
 		error_exit(argv, file, 0, 0);
@@ -32,6 +33,7 @@ void	child_process_first(int *pipe_fd, char *argv, char **envp)
 	unlink_free_infile(argv, file);
 	if (close(pipe_fd[1]) == -1)
 		error_exit(argv, NULL, pipe_fd[1], pipe_fd[0]);
+	fprintf(stderr, "First command: %s", check_infile(argv));
 	execute_command(check_infile(argv), envp);
 }
 
