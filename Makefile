@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/09/02 23:01:45 by mde-sa--         ###   ########.fr        #
+#    Updated: 2023/09/05 22:40:51 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,13 @@ CC      = 	cc
 
 CFLAGS  =   -g -Wall -Wextra -Werror 
 
-SRCDIR	=	src
+SRCDIR	=	src/mandatory
+
+SRCBONDIR = src/bonus
 
 INCDIR	=   includes
 
-LIBFTDIR =  $(SRCDIR)/libft
+LIBFTDIR =  src/libft
 
 SRC		=	main.c commands.c ft_command_split.c manage_infile.c free_memory.c
 
@@ -31,7 +33,7 @@ LIBS 	=   -L$(LIBFTDIR) -lft
 
 OBJS	= 	$(addprefix $(SRCDIR)/, $(SRC:.c=.o))
 
-OBJSBON =   $(addprefix $(SRCDIR)/, $(SRCBON:.c=.o))
+OBJSBON =   $(addprefix $(SRCBONDIR)/, $(SRCBON:.c=.o))
 
 RM      = 	rm -rf
 
@@ -45,6 +47,9 @@ bonus: $(OBJSBON)
 	@ $(CC) $(CFLAGS) $(OBJSBON) $(LIBS) -o $(NAME)
 
 $(SRCDIR)/%.o: $(SRCDIR)/%.c $(INCDIR)/*.h
+	@ $(CC) $(CFLAGS) -c $< -I $(INCDIR) -I $(LIBFTDIR) -o $@
+
+$(SRCBONDIR)/%.o: $(SRCBONDIR)/%.c $(INCDIR)/*.h
 	@ $(CC) $(CFLAGS) -c $< -I $(INCDIR) -I $(LIBFTDIR) -o $@
 
 libft:
