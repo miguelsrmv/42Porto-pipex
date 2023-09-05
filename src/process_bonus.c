@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 21:56:10 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/05 17:27:40 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/05 17:41:29 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	child_process_first(int *pipe_fd, t_input_var cl_input, char **envp)
 
 	if (close(pipe_fd[0]) == -1)
 		error_exit(NULL, NULL, 0, 0);
-	fprintf(stderr, "file: %s\n", cl_input.input_file);
 	file_fd = open_file(cl_input.input_file, IN_FILE);
 	if (file_fd == -1)
 		error_exit(cl_input.argv[1], cl_input.input_file, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 20:42:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/05 17:28:25 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/05 18:48:45 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,10 @@ char	**ft_command_split(const char *s);
 /// Manage_infile.c
 
 int		open_file(char *arg, int file_type);
-char	*check_infile(char *argv);
-char	*urandom_infile(void);
-char	*create_urand_buffer(void);
+char	*check_infile(char *argv1, char *argv2);
+char	*create_infile(char *(*create_buffer)(char *limiter), char *limiter);
+char	*create_urand_buffer(char *limiter);
+char	*create_heredoc_buffer(char *limiter);
 
 /// Free_memory.c
 void	free_memory_command(char **path, char **split_commands,

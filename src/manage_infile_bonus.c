@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:23:50 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/02 23:14:39 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/05 19:15:49 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,42 +28,43 @@ int	open_file(char *arg, int file_type)
 	return (file_fd);
 }
 
-char	*check_infile(char *argv)
+char	*check_infile(char *argv1, char *argv2)
 {
-	/*if (!ft_strncmp(argv, "/dev/urandom", ft_strlen("/dev/urandom")))
-		return (urandom_infile());*/
-	/*if (!ft_strncmp(argv, "here_doc", ft_strlen("here_doc")))
-		return (heredoc_infile());
-	else*/
-	return (argv);
+	if (!ft_strncmp(argv1, "/dev/urandom", ft_strlen("/dev/urandom")))
+		return (create_infile(create_urand_buffer, NULL));
+	else if (!ft_strncmp(argv1, "here_doc", ft_strlen("here_doc")))
+		return (create_infile(create_heredoc_buffer, argv2));
+	else
+		return (argv1);
 }
 
-char	*urandom_infile(void) // Generalizar??
+char	*create_infile(char *(create_buffer)(char *limiter), char	*limiter)
 {
-	char	*urand_buffer;
+	char	*buffer;
 	char	*buffer_path;
 	int		buffer_fd;
 
-	urand_buffer = create_urand_buffer();
+	buffer = create_buffer(limiter);
 	buffer_path = ft_strdup("/tmp/pipex_buffer");
 	if (!buffer_path)
-		free_memory_buffers(urand_buffer, NULL, 0);
+		free_memory_buffers(buffer, NULL, 0);
 	buffer_fd = open(buffer_path, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 	if (buffer_fd == -1)
-		free_memory_buffers(urand_buffer, buffer_path, 0);
-	if (write(buffer_fd, urand_buffer, ft_strlen(urand_buffer)) == -1)
-		free_memory_buffers(urand_buffer, buffer_path, buffer_fd);
+		free_memory_buffers(buffer, buffer_path, 0);
+	if (write(buffer_fd, buffer, ft_strlen(buffer)) == -1)
+		free_memory_buffers(buffer, buffer_path, buffer_fd);
 	close(buffer_fd);
-	free(urand_buffer);
+	free(buffer);
 	return (buffer_path);
 }
 
-char	*create_urand_buffer(void)
+char	*create_urand_buffer(char *limiter)
 {
 	int		urand_fd;
 	int		i;
 	char	*urand_buffer;
 
+	(void)limiter;
 	urand_fd = open("/dev/urandom", O_RDONLY);
 	if (urand_fd == -1)
 	{
@@ -83,4 +84,32 @@ char	*create_urand_buffer(void)
 	urand_buffer[i + 1] = '\0';
 	close(urand_fd);
 	return (urand_buffer);
+}
+
+char	*create_heredoc_buffer(char *limiter)
+{
+	char	*result;
+	char	*input;
+	char	*temp;
+	int		bytes_read;
+
+	input = (char *)malloc(sizeof(char) * 1001);
+	result = (char *)malloc(sizeof(char) * 1);
+	if (!input || !result)
+		exit(EXIT_FAILURE);
+	result[0] = '\0';
+	while (1)
+	{
+		bytes_read = read(STDIN_FILENO, input, 1000);
+		if (!bytes_read)
+			free_memory_buffers(input, result, 0);
+		input[bytes_read] = '\0';
+		if (!ft_strncmp(input, limiter, ft_strlen(limiter)))
+			break ;
+		temp = ft_strjoin(result, input);
+		free(result);
+		result = temp;
+	}
+	free(input);
+	return (result);
 }

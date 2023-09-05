@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 21:57:39 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/02 23:07:28 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/05 19:13:07 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,10 @@ void	usage_check(int argc, char **argv)
 		ft_printf("%s", ARG_USAGE);
 		exit(EXIT_FAILURE);
 	}
+}
+
+void	simple_error_exit(char *message)
+{
+	perror(message);
+	exit(EXIT_FAILURE);
 }

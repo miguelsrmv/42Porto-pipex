@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 12:24:41 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/05 17:19:23 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/05 18:37:31 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_input_var	create_input_struct(int argc, char **argv)
 
 	cl_input.argc = argc;
 	cl_input.argv = argv;
-	cl_input.input_file = check_infile(argv[1]);
+	cl_input.input_file = check_infile(argv[1], argv[2]);
 	cl_input.output_file = argv[argc - 1];
 	cl_input.command_num = command_calc(argc, argv);
 	if (ft_strncmp(argv[1], "here_doc", ft_strlen("here_doc")))
