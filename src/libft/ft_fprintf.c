@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 12:39:15 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/01 17:07:16 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/06 09:41:03 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_arg_fd(char *string, int *i, va_list args)
 	return (counter);
 }
 
-int	ft_printf_fd(int fd, const char *string, ...)
+int	ft_fprintf(int fd, const char *string, ...)
 {
 	int		counter;
 	int		i;

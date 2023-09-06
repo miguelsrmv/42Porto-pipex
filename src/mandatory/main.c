@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 12:24:41 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/05 23:57:54 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/06 09:42:01 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc != 5)
 	{
-		ft_printf_fd(STDERR_FILENO, "%s", ARG_USAGE);
+		ft_fprintf(STDERR_FILENO, "%s", ARG_USAGE);
 		return (ERROR);
 	}
 	if (pipe(pipe_fd) == -1)

@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:15:57 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/01 17:07:51 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/06 09:41:23 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ char	*ft_gnl_strtrim_right(char *buffer);
 /* Part 6: extra functions */
 int		ft_isspace(int c);
 int		ft_isquote(int c);
-int		ft_printf_fd(int fd, const char *string, ...);
+int		ft_fprintf(int fd, const char *string, ...);
 int		check_arg_fd(char *string, int *i, va_list args);
 
 #endif

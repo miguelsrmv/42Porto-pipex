@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 23:04:04 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/06 01:22:42 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/06 09:42:29 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	free_memory_command(char **path, char **split_commands,
 	int	i;
 
 	if (exit_code == COMMAND_NOT_FOUND)
-		ft_printf_fd(STDERR_FILENO, "Error: command not found.\n");
+		ft_fprintf(STDERR_FILENO, "Error: command not found.\n");
 	if (path)
 	{
 		i = 0;
