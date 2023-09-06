@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/09/06 01:14:01 by mde-sa--         ###   ########.fr        #
+#    Updated: 2023/09/06 09:59:19 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ all: libft $(NAME)
 $(NAME): $(OBJS)
 	@ $(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME) 
 
-bonus: $(OBJSBON)
+bonus: $(OBJSBON) libft
 	@ $(CC) $(CFLAGS) $(OBJSBON) $(LIBS) -o $(NAME)
 
 $(SRCDIR)/%.o: $(SRCDIR)/%.c $(INCDIR)/*.h

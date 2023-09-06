@@ -6,22 +6,30 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:23:50 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/06 00:57:31 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/06 16:19:59 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-int	open_file(char *arg, int file_type)
+int	open_file(t_input_var cl_input, int file_type)
 {
 	int	file_fd;
 
 	if (file_type == IN_FILE)
-		file_fd = open(arg, O_RDONLY, 0777);
-	if (file_type == OUT_FILE)
-		file_fd = open(arg, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+		file_fd = open(cl_input.input_file, O_RDONLY, 0777);
+	else if (file_type == OUT_FILE)
+	{
+		if (ft_strncmp(cl_input.argv[1], "here_doc", ft_strlen("here_doc")))
+			file_fd = open(cl_input.output_file, O_WRONLY | O_CREAT | O_TRUNC,
+					0777);
+		else
+			file_fd = open(cl_input.output_file, O_WRONLY | O_CREAT | O_APPEND,
+					0777);
+	}
 	if (file_fd == -1)
 	{
+		close(file_fd);
 		perror(NULL);
 		exit(EXIT_FAILURE);
 	}
