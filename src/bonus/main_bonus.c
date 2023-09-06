@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 12:24:41 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/05 18:37:31 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/06 02:38:02 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ int	main(int argc, char **argv, char **envp)
 	while (cl_input.command_num-- > 3)
 	{
 		if (pipe(pipe_fd) == -1)
-			return (ERROR);
+			error_exit(&cl_input, 0, 0, 0);
 		pid = fork();
 		if (pid == -1)
-			return (ERROR);
+			error_exit(&cl_input, 0, 0, 0);
 		if (pid == 0)
 			child_process_main(pipe_fd, cl_input, envp, last_read_fd);
 		else
-			prepare_next_process(&last_read_fd, pipe_fd);
+			prepare_next_process(pipe_fd, &last_read_fd);
 	}
 	parent_process(pipe_fd, cl_input, envp, last_read_fd);
 	return (SUCCESS);

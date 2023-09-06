@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 20:42:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/02 16:31:08 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/05 23:58:21 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ char	*get_command_location(char **path, char *command);
 void	execute_command(char *command, char **envp);
 
 /// Main.c
-int		open_file(char *arg, int file_type);
 void	child_process(int *pipe_fd, char **argv, char **envp);
 void	parent_process(int *pipe_fd, char **argv, char **envp);
 
@@ -51,12 +50,13 @@ typedef struct s_split_numbers {
 char	**ft_command_split(const char *s);
 
 /// Infile_manage.c
-
+int		open_file(char *arg, int file_type);
 char	*check_infile(char *argv);
 char	*urandom_infile(void);
 char	*create_urand_buffer(void);
 
-/// Free_memory.c
+/// free_memory.c
+void	error_exit(char *argv, char *file, int fd1, int fd2);
 void	free_memory_command(char **path, char **split_commands,
 			char *command_location, int exit_code);
 void	free_memory_buffers(char *buffer, char *path, int fd);

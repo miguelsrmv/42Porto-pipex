@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 13:14:10 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/05 15:39:10 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/06 02:01:45 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*get_command_location(char **path, char *command)
 	return (NULL);
 }
 
-void	execute_command(char *command, char **envp)
+void	exec_command(char *command, char **envp)
 {
 	char	**path;
 	char	**split_commands;
@@ -85,6 +85,6 @@ void	execute_command(char *command, char **envp)
 		free_memory_command(path, split_commands, NULL, COMMAND_NOT_FOUND);
 	free(path);
 	if (execve(command_location, split_commands, envp) == -1)
-		free_memory_command(path, split_commands,
+		free_memory_command(NULL, split_commands,
 			command_location, EXIT_FAILURE);
 }

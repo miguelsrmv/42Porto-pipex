@@ -6,7 +6,7 @@
 #    By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 09:55:46 by mde-sa--          #+#    #+#              #
-#    Updated: 2023/09/05 22:40:51 by mde-sa--         ###   ########.fr        #
+#    Updated: 2023/09/06 01:14:01 by mde-sa--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ LIBFTDIR =  src/libft
 
 SRC		=	main.c commands.c ft_command_split.c manage_infile.c free_memory.c
 
-SRCBON	=	main_bonus.c commands_bonus.c error_handling_bonus.c free_memory_bonus.c \
-			ft_command_split_bonus.c manage_infile_bonus.c process_bonus.c
+SRCBON	=	main_bonus.c ft_command_split_bonus.c manage_infile_bonus.c \
+			free_memory_bonus.c process_bonus.c commands_bonus.c
 
 LIBS 	=   -L$(LIBFTDIR) -lft
 

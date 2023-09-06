@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 20:42:38 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/05 18:48:45 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/06 02:38:12 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@
 # define UNABLE_TO_MALLOC "Error: Couldn't allocate memory.\n"
 # define ARG_USAGE "Error: Invalid usage.\n"
 
-// Function declarations
-
+// Typedef structs
 typedef struct s_input_var {
 	int		argc;
 	char	**argv;
@@ -48,29 +47,23 @@ typedef struct s_split_numbers {
 	size_t	i;
 }	t_split_numbers;
 
+// Function declarations
 /// Commands.c
 int		command_calc(int argc, char **argv);
 char	**get_path_list(char **envp);
 char	*get_command_location(char **path, char *command);
-void	execute_command(char *command, char **envp);
+void	exec_command(char *command, char **envp);
 
 /// Process.c
-void	child_process_first(int *pipe_fd, t_input_var cl_input, char **envp);
+void	child_process_first(int *pipe_fd, t_input_var cl_input, char **envp,
+			int last_read_fd);
 void	child_process_main(int *pipe_fd, t_input_var cl_input, char **envp,
 			int last_read_fd);
-void	prepare_next_process(int *last_read_fd, int *pipe_fd);		
+void	prepare_next_process(int *pipe_fd, int *last_read_fd);		
 void	parent_process(int *pipe_fd, t_input_var cl_input, char **envp,
 			int last_read_fd);
 
-/// Error_handling_bonus.c
-void	error_exit(char *argv, char *file, int fd1, int fd2);
-void	usage_check(int argc, char **argv);
-
-/// ft_command_split.c
-char	**ft_command_split(const char *s);
-
 /// Manage_infile.c
-
 int		open_file(char *arg, int file_type);
 char	*check_infile(char *argv1, char *argv2);
 char	*create_infile(char *(*create_buffer)(char *limiter), char *limiter);
@@ -78,10 +71,13 @@ char	*create_urand_buffer(char *limiter);
 char	*create_heredoc_buffer(char *limiter);
 
 /// Free_memory.c
+void	usage_check(int argc, char **argv);
+void	error_exit(t_input_var *cl_input, int fd1, int fd2, int fd3);
 void	free_memory_command(char **path, char **split_commands,
 			char *command_location, int exit_code);
 void	free_memory_buffers(char *buffer, char *path, int fd);
-void	free_infile(char **argv, char *file, int command_num);
-void	unlink_free_infile(char *argv, char *file);
+
+/// ft_command_split.c
+char	**ft_command_split(const char *s);
 
 #endif

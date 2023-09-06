@@ -6,12 +6,28 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:23:50 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/01 23:04:43 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/06 00:40:44 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "pipex.h"
+
+int	open_file(char *arg, int file_type)
+{
+	int	file_fd;
+
+	if (file_type == IN_FILE)
+		file_fd = open(arg, O_RDONLY, 0777);
+	if (file_type == OUT_FILE)
+		file_fd = open(arg, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (file_fd == -1)
+	{
+		perror(NULL);
+		exit(EXIT_FAILURE);
+	}
+	return (file_fd);
+}
 
 char	*check_infile(char *argv)
 {
@@ -44,26 +60,27 @@ char	*urandom_infile(void)
 char	*create_urand_buffer(void)
 {
 	int		urand_fd;
-	int		i;
 	char	*urand_buffer;
+	int		i;
+	int		read_return;
 
 	urand_fd = open("/dev/urandom", O_RDONLY);
 	if (urand_fd == -1)
-	{
-		perror(NULL);
-		exit(EXIT_FAILURE);
-	}
+		free_memory_buffers(NULL, NULL, 0);
 	urand_buffer = (char *)malloc(sizeof(char) * 1002);
 	if (!urand_buffer)
+		free_memory_buffers(NULL, NULL, urand_fd);
+	i = -1;
+	read_return = 1;
+	while (++i < 1000 && read_return != -1)
 	{
-		perror(NULL);
-		exit(EXIT_FAILURE);
+		read_return = read(urand_fd, &urand_buffer[i], 1);
+		if (read_return == -1)
+			free_memory_buffers(urand_buffer, NULL, urand_fd);
 	}
-	i = 0;
-	while (read(urand_fd, &urand_buffer[i], 1) && urand_buffer[i] && i < 1000)
-		i++;
 	urand_buffer[i] = '\n';
 	urand_buffer[i + 1] = '\0';
-	close(urand_fd);
+	if (close(urand_fd) == -1)
+		free_memory_buffers(urand_buffer, NULL, urand_fd);
 	return (urand_buffer);
 }
