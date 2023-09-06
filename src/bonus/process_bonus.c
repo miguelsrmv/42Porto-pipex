@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 21:56:10 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/06 16:17:21 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/06 16:38:21 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ void	child_process_first(int *pipe_fd, t_input_var cl_input, char **envp,
 	int		file_fd;
 
 	if (close(pipe_fd[0]) == -1)
-		error_exit(NULL, pipe_fd[0], pipe_fd[1], last_read_fd);
+		error_exit(NULL, pipe_fd[1], last_read_fd, 0);
 	file_fd = open_file(cl_input, IN_FILE);
 	if (file_fd == -1)
 		error_exit(&cl_input, 0, pipe_fd[1], last_read_fd);
 	if (dup2(file_fd, STDIN_FILENO) == -1)
 		error_exit(&cl_input, file_fd, pipe_fd[1], last_read_fd);
 	if (close(file_fd) == -1)
-		error_exit(&cl_input, file_fd, pipe_fd[1], last_read_fd);
+		error_exit(&cl_input, pipe_fd[1], last_read_fd, 0);
 	if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
 		error_exit(&cl_input, 0, pipe_fd[1], last_read_fd);
 	if (!ft_strncmp(cl_input.argv[1], "/dev/urandom", ft_strlen("/dev/urandom")
@@ -36,7 +36,7 @@ void	child_process_first(int *pipe_fd, t_input_var cl_input, char **envp,
 		free(cl_input.input_file);
 	}
 	if (close(pipe_fd[1]) == -1)
-		error_exit(NULL, 0, pipe_fd[1], last_read_fd);
+		error_exit(NULL, 0, 0, last_read_fd);
 	exec_command(cl_input.argv[cl_input.argc - cl_input.command_num], envp);
 }
 
@@ -52,11 +52,11 @@ void	child_process_main(int *pipe_fd, t_input_var cl_input, char **envp,
 		if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
 			error_exit(NULL, pipe_fd[0], pipe_fd[1], last_read_fd);
 		if (close(pipe_fd[0]) == -1)
-			error_exit(NULL, pipe_fd[0], pipe_fd[1], last_read_fd);
+			error_exit(NULL, pipe_fd[1], 0, last_read_fd);
 		if (close(pipe_fd[1]) == -1)
-			error_exit(NULL, 0, pipe_fd[1], last_read_fd);
-		if (close(last_read_fd) == -1)
 			error_exit(NULL, 0, 0, last_read_fd);
+		if (close(last_read_fd) == -1)
+			error_exit(NULL, 0, 0, 0);
 		exec_command(cl_input.argv[cl_input.argc - cl_input.command_num], envp);
 	}
 }
@@ -64,8 +64,12 @@ void	child_process_main(int *pipe_fd, t_input_var cl_input, char **envp,
 void	prepare_next_process(int *pipe_fd, int *last_read_fd)
 {
 	if (*last_read_fd != -1)
-		close(*last_read_fd);
-	close(pipe_fd[1]);
+	{
+		if (close(*last_read_fd) == -1)
+			error_exit(NULL, pipe_fd[0], pipe_fd[1], 0);
+	}
+	if (close(pipe_fd[1]) == -1)
+		error_exit(NULL, pipe_fd[0], 0, 0);
 	*last_read_fd = pipe_fd[0];
 	wait(NULL);
 }
@@ -81,10 +85,10 @@ void	parent_process(int *pipe_fd, t_input_var cl_input, char **envp,
 	if (dup2(last_read_fd, STDIN_FILENO) == -1)
 		error_exit(NULL, pipe_fd[0], file_fd, 0);
 	if (close(pipe_fd[0]) == -1)
-		error_exit(NULL, pipe_fd[0], file_fd, 0);
+		error_exit(NULL, 0, file_fd, 0);
 	if (dup2(file_fd, STDOUT_FILENO) == -1)
 		error_exit(NULL, 0, file_fd, 0);
 	if (close(file_fd) == -1)
-		error_exit(NULL, 0, file_fd, 0);
+		error_exit(NULL, 0, 0, 0);
 	exec_command(cl_input.argv[cl_input.argc - cl_input.command_num], envp);
 }

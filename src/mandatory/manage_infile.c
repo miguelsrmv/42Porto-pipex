@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:23:50 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/06 00:40:44 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/06 16:29:10 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ char	*urandom_infile(void)
 		free_memory_buffers(urand_buffer, buffer_path, 0);
 	if (write(buffer_fd, urand_buffer, ft_strlen(urand_buffer)) == -1)
 		free_memory_buffers(urand_buffer, buffer_path, buffer_fd);
-	close(buffer_fd);
+	if (close(buffer_fd) == -1)
+		free_memory_buffers(urand_buffer, buffer_path, 0);
 	free(urand_buffer);
 	return (buffer_path);
 }
@@ -81,6 +82,6 @@ char	*create_urand_buffer(void)
 	urand_buffer[i] = '\n';
 	urand_buffer[i + 1] = '\0';
 	if (close(urand_fd) == -1)
-		free_memory_buffers(urand_buffer, NULL, urand_fd);
+		free_memory_buffers(urand_buffer, NULL, 0);
 	return (urand_buffer);
 }
