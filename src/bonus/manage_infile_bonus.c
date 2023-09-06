@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:23:50 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/06 16:35:15 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/06 16:45:00 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ int	open_file(t_input_var cl_input, int file_type)
 	int	file_fd;
 
 	if (file_type == IN_FILE)
-		file_fd = open(cl_input.input_file, O_RDONLY, 0777);
+		file_fd = open(cl_input.input_file, O_RDONLY);
 	else if (file_type == OUT_FILE)
 	{
 		if (ft_strncmp(cl_input.argv[1], "here_doc", ft_strlen("here_doc")))
 			file_fd = open(cl_input.output_file, O_WRONLY | O_CREAT | O_TRUNC,
-					0777);
+					0644);
 		else
 			file_fd = open(cl_input.output_file, O_WRONLY | O_CREAT | O_APPEND,
-					0777);
+					0644);
 	}
 	if (file_fd == -1)
 	{
@@ -55,7 +55,7 @@ char	*create_infile(char *(create_buffer)(char *limiter), char	*limiter)
 	buffer_path = ft_strdup("/tmp/pipex_buffer");
 	if (!buffer_path)
 		free_memory_buffers(buffer, NULL, 0);
-	buffer_fd = open(buffer_path, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+	buffer_fd = open(buffer_path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (buffer_fd == -1)
 		free_memory_buffers(buffer, buffer_path, 0);
 	if (write(buffer_fd, buffer, ft_strlen(buffer)) == -1)
