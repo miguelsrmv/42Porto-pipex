@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:15:57 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/07 14:24:35 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/07 14:58:16 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ char	*ft_gnl_strtrim_right(char *buffer);
 int		ft_isspace(int c);
 int		ft_isquote(int c);
 int		ft_strcmp(const char *s1, const char *s2);
+int		ft_strcmp_input(const char *input, const char *limiter);
 int		ft_fprintf(int fd, const char *string, ...);
 int		check_arg_fd(char *string, int *i, va_list args);
 
