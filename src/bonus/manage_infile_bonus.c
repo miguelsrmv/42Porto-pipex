@@ -6,7 +6,7 @@
 /*   By: mde-sa-- <mde-sa--@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:23:50 by mde-sa--          #+#    #+#             */
-/*   Updated: 2023/09/06 16:45:00 by mde-sa--         ###   ########.fr       */
+/*   Updated: 2023/09/07 14:31:48 by mde-sa--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ char	*create_heredoc_buffer(char *limiter)
 		if (bytes_read == -1)
 			free_memory_buffers(input, result, 0);
 		input[bytes_read] = '\0';
-		if (!ft_strncmp(input, limiter, ft_strlen(limiter)))
+		if (!ft_strncmp(input, limiter, bytes_read - 1))
 			break ;
 		temp = ft_strjoin(result, input);
 		if (!temp)
